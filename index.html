@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="digitsensitive">
+    <title>Battleship</title>
+    <script src="dist/bundle.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="game"></div>
+</div>
+<style>
+    body {
+        background: #dad5c0;
+        margin: 0;
+    }
+
+    .container {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+<script>
+  // create game for development purposes
+  (function () {
+    const server = (new URLSearchParams(window.location.search)).get('server');
+    if (!server) {
+      window.location.replace(`?server=ws://localhost:8080/games/${Math.round(Math.random() * 1000)}`);
+    }
+    const options = {
+      server: server,
+      parent: document.querySelector('#game'),
+    };
+    (new Battleship(options)).run();
+  })();
+</script>
+</body>
+</html>
