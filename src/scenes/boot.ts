@@ -25,13 +25,37 @@ export class Boot extends Phaser.Scene {
   }
 
   preload(): void {
+    this.progressBar();
     this.load.image("logo", "./src/assets/phaser.png");
+    this.load.image("bg", "./src/assets/bg.png");
   }
 
   create(data: any): void {
-    this.phaserSprite = this.add.sprite(400, 300, "logo");
+    const scale = 0.30;
+    const bg = this.add.tileSprite(0, 0, this.game.canvas.width / scale, this.game.canvas.height / scale, 'bg').setOrigin(0, 0).setScale(scale, scale);
+    this.createBoard();
+    this.phaserSprite = this.add.sprite(400, 300, "logo").setDepth(2);
   }
 
   update(time: number, delta: number) {
+  }
+
+  private createBoard(): void {
+
+  }
+
+  private progressBar(): void {
+
+    const progress = this.add.graphics();
+
+    this.load.on('progress', function (value) {
+      progress.clear();
+      progress.fillStyle(0xffffff, 1);
+      progress.fillRect(0, 270, 800 * value, 60);
+    });
+
+    this.load.on('complete', function () {
+      progress.destroy();
+    });
   }
 }
