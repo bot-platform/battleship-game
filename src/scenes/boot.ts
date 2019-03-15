@@ -33,16 +33,13 @@ export class Boot extends Phaser.Scene {
   create(data: any): void {
     const scale = 0.30;
     const bg = this.add.tileSprite(0, 0, this.game.canvas.width / scale, this.game.canvas.height / scale, 'bg').setOrigin(0, 0).setScale(scale, scale);
-    this.createBoard();
-    this.phaserSprite = this.add.sprite(400, 300, "logo").setDepth(2);
+    // this.phaserSprite = this.add.sprite(400, 300, "logo").setDepth(2);
   }
 
   update(time: number, delta: number) {
+    this.scene.start('Main');
   }
 
-  private createBoard(): void {
-
-  }
 
   private progressBar(): void {
 
